@@ -1,6 +1,19 @@
+ul {
+    padding: 1rem;
+    margin: 0;
+}
+li {
+    list-style-type: none;
+}
+p {
+    margin: 0;
+}
+html {
+    font-family:monospace;
+}
 .container {
     display: grid;
-    grid-template: 1fr 5fr / 1fr 5fr;
+    grid-template: auto auto / auto 5fr;
     grid-template-areas: 
     "sidebar header"
     "sidebar content-area"
@@ -8,12 +21,133 @@
 }
 .sidebar {
     grid-area: sidebar;
+    font-size: 1.5rem;
+    >ul {
+        display: grid;
+        grid-template: repeat(12,auto) / 1fr;
+        gap: 1.5rem;
+    }
+    > ul > li {
+        /* box-sizing: border-box; */
+        display: grid;
+        grid-template: 1fr / 1fr 2fr;
+        gap: 1rem;
+        justify-items: start;
+        align-items: center;
+        > svg {
+            justify-self: center;
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    > ul > li:first-child {
+        margin-bottom: 3vh;
+        > svg {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+    > ul > li:nth-child(9) {
+        margin-top: 10vh;
+    }
+    > ul > li:hover {
+        border-left: 3px solid grey;
+    }
 }
 .header {
     grid-area: header;
+    margin: 0px 2rem;
+    .sidebar-row1 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .sidebar-row2 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        .header-greetings {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }
 .content {
     grid-area: content-area;
+    padding: 2rem;
+    display: grid;
+    gap: 2rem;
+    grid-template: 1fr 1fr / 4fr 1fr;
+    grid-template-areas: "projects announce"
+    "projects trending";
+    > .projects-section { 
+        grid-area: projects;
+        display: grid;
+        grid-template: auto repeat(3,minmax(100px,1fr)) /
+        repeat(2,minmax(100px,1fr));
+        gap: 2rem;
+    > p.projects-section-title {
+        grid-area: 1 / 1 / span 1 / span 2;
+        margin-bottom: -2rem;
+        font-size: 1.5rem;
+        font-weight: bolder;
+    }
+    > .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        padding: 1rem;
+        > .title {
+            font-size: 1.2rem;
+            font-weight: bolder;
+        }
+    }
+    > .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    }
+    > .announcements-section {
+        grid-area: announce;
+        display: flex;
+        flex-direction: column;
+        > p.announcements-section-title {
+            font-size: 1.5rem;
+            font-weight: bolder;
+        }
+        > .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            > section {
+                padding: 1rem 0;
+                border-bottom: 1px solid grey;
+            }
+            > section:last-child {
+                border-bottom: 0;
+            }
+            > section > .title {
+                font-size: 1.3rem;
+                font-weight: bolder;
+            }
+        }
+        > .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+    
+    }
+    > .trending-section {
+        grid-area: trending;
+        > .trending-section-title {
+            font-size: 1.5rem;
+            font-weight: bolder;
+        }
+    }
 }
 .footer {
     grid-area: footer;
